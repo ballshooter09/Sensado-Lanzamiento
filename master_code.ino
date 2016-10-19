@@ -314,19 +314,26 @@ while ( true ){
      realDistance=values[mediana];
      if (aux<3){
         oldDistance=realDistance;
-        set=500+10*oldDistance;
+        set=500+20*oldDistance;
         aux=aux+1;
       }
       sei();
-     Serial.println(realDistance);
-     Serial.println(oldDistance);
+     //Serial.println(realDistance);
+     //Serial.println(oldDistance);
      if((realDistance >= oldDistance+4) || (realDistance <= oldDistance-3)){
       Serial.println("Falle");
       errors=errors+1;
       if (errors==5){
         errors=0;
         aux=0;
-        break;
+        set=0;
+        Integral=0;
+        last_error=0;
+        Integral1=0;
+        last_error1=0;
+        analogWrite(MOTOR1,0);
+        analogWrite(MOTOR2,0);
+        break;//busca de nuevo
       }
      }
      //aqui empezaba codigo del PID, pero era muy lento
@@ -394,5 +401,3 @@ ISR (PCINT2_vect)
     }
 
 }
-
-
